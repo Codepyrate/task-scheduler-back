@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 from .models import Task
 from .serializers import TaskSerlizer
-# Create your views here.
+#git add .git add .git add .
 
 class TaskListView(ListCreateAPIView):
     queryset= Task.objects.all()
