@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'task_scheduler.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "snlsosmd",
+        "USER": "snlsosmd",
+        "PASSWORD": "Mv9WUOQzU_5ADCIaGd4-Mo7Vp3gbg_LJ",
+        "HOST": "tyke.db.elephantsql.com",
+        "PORT": "5432",
     }
 }
 
