@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
+import requests
 # from rest_framework_simplejwt import views as jwt_views
 # from .views import MyTokenObtainPairView
 
@@ -22,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("home", include("notes.urls")),
     path("api-auth/", include("rest_framework.urls")),
+    path('search/' , include("search.urls"))
     # path(
     #     "api/token/",
     #     MyTokenObtainPairView.as_view(),
