@@ -15,13 +15,32 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
+
+import requests
+# from rest_framework_simplejwt import views as jwt_views
+# from .views import MyTokenObtainPairView
+
 from rest_framework_simplejwt import views as jwt_views
 from .views import MyTokenObtainPairView
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("home/", include("notes.urls")),
     path("api-auth/", include("rest_framework.urls")),
+
+    path('search/' , include("search.urls"))
+    # path(
+    #     "api/token/",
+    #     MyTokenObtainPairView.as_view(),
+    #     name="token_obtain_pair",
+    # ),
+    # path(
+    #     "api/token/refresh",
+    #     jwt_views.TokenRefreshView.as_view(),
+    #     name="token_refresh",
+    # ),
+
     path(
         "api/token/",
         MyTokenObtainPairView.as_view(),
@@ -32,4 +51,5 @@ urlpatterns = [
         jwt_views.TokenRefreshView.as_view(),
         name="token_refresh",
     ),
+
 ]

@@ -54,6 +54,10 @@ INSTALLED_APPS = [
     "corsheaders",
     'notes',
 
+    'rest_framework',
+    'search'
+
+
 ]
 
 MIDDLEWARE = [
