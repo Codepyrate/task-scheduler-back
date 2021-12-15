@@ -48,6 +48,9 @@ class TestTask(TestCase):
 
 class APITest(APITestCase):
 
+
+############ Task features tests ###############
+
     def test_task_list(self):
 
         response = self.client.get(reverse("task_list"))
@@ -137,6 +140,43 @@ class APITest(APITestCase):
         self.client.login(username="tester", password="pass")
         response = self.client.delete(url)
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT, url)
+
+######### Notes feature tests ########
+
+    def test_notes_list(self):
+
+        response = self.client.get(reverse("note_list"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+    def test_notes_detail(self):
+
+        test_user = get_user_model().objects.create_user(
+            username="test", password="pass"
+        )
+        test_user.save()
+
+        test_note = Note.objects.create(
+            id = 1,
+            title = "New Note",
+            message = "Study",
+            date = "2021-12-15T19:58:24.789181Z",
+        )
+        test_note.save()
+
+        response = self.client.get(reverse("note_detail", args=[1]))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.data,
+            {
+                "id": 1,
+                "title": test_note.title,
+                "message": test_note.message,
+                "date": test_note.date,
+                "user": test_note.user,
+
+            },
+        )
 
     
 
