@@ -18,6 +18,8 @@ gunicorn = "^20.1.0"
 requests = "^2.26.0"
 django-crontab = "^0.7.1"
 django-cron = "^0.5.1"
+coverage = "^6.2"
+environ = "^1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.12b0"
