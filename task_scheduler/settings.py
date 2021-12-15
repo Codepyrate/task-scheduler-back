@@ -53,7 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',   
     'rest_framework',
     "corsheaders",
+    "search",
     'notes',
+    'django_crontab',
 
 ]
 
@@ -134,6 +136,8 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 
@@ -142,6 +146,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -168,3 +173,8 @@ SIMPLE_JWT = {
         seconds=60 * 60
     ),  # lasts for 60 minutes
 }
+
+
+CRONJOBS = [
+    ('* * * * *', 'notes.cron.my_cron_job')
+]
