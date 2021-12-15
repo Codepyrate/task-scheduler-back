@@ -30,6 +30,22 @@ class TestTask(TestCase):
 
 
 
+    def test_task_str(self):
+        task = Task.objects.get(id = 1)
+        self.assertEqual(str(task.title), "Workout")
+
+    def test_task_content(self):
+        task = Task.objects.get(id=1)
+        self.assertEqual(task.title,'Workout')
+        self.assertEqual(task.message,'Legs Day')
+        
+
+    def test_note_content(self):
+        note = Note.objects.get(id=1)
+        self.assertEqual(note.title,'New Note')
+        self.assertEqual(note.message,'Study')
+        
+
 
 
 
