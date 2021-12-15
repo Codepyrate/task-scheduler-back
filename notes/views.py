@@ -40,7 +40,7 @@ class TaskDetail(RetrieveUpdateDestroyAPIView):
 
 
 class UserList(ListCreateAPIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsOwnerOrReadOnly,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
