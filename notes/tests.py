@@ -116,6 +116,28 @@ class APITest(APITestCase):
         self.assertEqual(Task.objects.count(), test_task.id)
         self.assertEqual(Task.objects.get().id, data["id"])
 
+    def test_task_delete(self):
+
+        test_user = get_user_model().objects.create_user(
+            username="test", password="pass"
+        )
+        test_user.save()
+
+        test_task = Task.objects.create(
+            title = "Workout",
+            message = "Legs Day",
+            date = "2021-12-23",
+            time = "23:27:00",
+        )
+
+        test_task.save()
+
+        task = Task.objects.get()
+        url = reverse("task_detail", kwargs={"pk": task.id})
+        self.client.login(username="tester", password="pass")
+        response = self.client.delete(url)
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT, url)
+
     
 
 
