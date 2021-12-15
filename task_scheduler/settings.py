@@ -18,9 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, False),
     ENVIRONMENT=(str, "PRODUCTION"),
-    ALLOW_ALL_ORIGINS=(bool, False),
+    ALLOW_ALL_ORIGINS=(bool, False),   
     ALLOWED_HOSTS=(list, []),
     ALLOWED_ORIGINS=(list, []),
+    CSRF_TRUSTED_ORIGINS=(list, []),
     DATABASE_ENGINE=(str, "django.db.backends.sqlite3"),
     DATABASE_NAME=(str, BASE_DIR / "db.sqlite3"),
     DATABASE_USER=(str, ""),
@@ -39,7 +40,7 @@ DEBUG = env.bool("DEBUG")
 ALLOWED_HOSTS = tuple(env.list("ALLOWED_HOSTS"))
 
 
-
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS")
 
 # Application definition
 
@@ -100,6 +101,7 @@ DATABASES = {
         "PASSWORD": env.str("DATABASE_PASSWORD"),
         "HOST": env.str("DATABASE_HOST"),
         "PORT": env.int("DATABASE_PORT"),
+        
     }
 }
 
@@ -159,7 +161,7 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
 CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
-
+CSRF_TRUSTED_ORIGINS = ['https://tasks-scheduler-apps.herokuapp.com']
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(
