@@ -178,6 +178,56 @@ class APITest(APITestCase):
             },
         )
 
+    def test_notes_update(self):
+
+        test_user = get_user_model().objects.create_user(
+            username="test", password="pass"
+        )
+        test_user.save()
+
+        test_note = Note.objects.create(
+            title = "New Note",
+            message = "Study",
+            date = "2021-12-15T19:58:24.789181Z",
+        )
+
+        test_note.save()
+
+        url = reverse("task_detail", args=[test_note.id])
+        data = {
+                "id": 1,
+                "title": "Edit Note",
+                "message": "Work",
+                "date": "2021-10-15T19:58:24.789181Z",
+        }
+
+        self.client.login(username="test", password="pass")
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK, url)
+        self.assertEqual(Note.objects.count(), test_note.id)
+        self.assertEqual(Note.objects.get().id, data["id"])
+
+    def test_note_delete(self):
+
+        test_user = get_user_model().objects.create_user(
+            username="test", password="pass"
+        )
+        test_user.save()
+
+        test_note = Note.objects.create(
+            title = "New Note",
+            message = "Study",
+            date = "2021-12-15T19:58:24.789181Z",
+        )
+
+        test_note.save()
+
+        note = Note.objects.get()
+        url = reverse("note_detail", kwargs={"pk": note.id})
+        self.client.login(username="tester", password="pass")
+        response = self.client.delete(url)
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT, url)
+
     
 
 
