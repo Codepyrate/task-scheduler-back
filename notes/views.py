@@ -51,6 +51,9 @@ class UserDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
 
 
+# print("hi")
+# def my_cron_job():
+#     print("Hello")
 # 
 
 
