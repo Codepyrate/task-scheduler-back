@@ -46,7 +46,15 @@ class TestTask(TestCase):
         self.assertEqual(note.message,'Study')
         
 
+class APITest(APITestCase):
 
+    def test_list(self):
+
+        response = self.client.get(reverse("task_list"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+    
 
 
 
