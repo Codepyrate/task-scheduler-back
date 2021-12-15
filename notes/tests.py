@@ -85,4 +85,38 @@ class APITest(APITestCase):
             },
         )
 
+    def test_task_update(self):
+
+        test_user = get_user_model().objects.create_user(
+            username="test", password="pass"
+        )
+        test_user.save()
+
+        test_task = Task.objects.create(
+            title = "Workout",
+            message = "Legs Day",
+            date = "2021-12-23",
+            time = "23:27:00",
+        )
+
+        test_task.save()
+
+        url = reverse("task_detail", args=[test_task.id])
+        data = {
+                "id": 1,
+                "title": "Shopping",
+                "message": "Groceries",
+                "date": "2021-12-25",
+                "time": "23:27:30",
+        }
+
+        self.client.login(username="test", password="pass")
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK, url)
+        self.assertEqual(Task.objects.count(), test_task.id)
+        self.assertEqual(Task.objects.get().id, data["id"])
+
     
+
+
+
