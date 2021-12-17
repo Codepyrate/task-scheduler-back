@@ -58,6 +58,9 @@ INSTALLED_APPS = [
     'notes',
     'django_crontab',
 
+    
+
+
 ]
 
 MIDDLEWARE = [
@@ -156,7 +159,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
+
+        # "rest_framework.permissions.IsAuthenticated",
+  
+
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -174,9 +182,4 @@ SIMPLE_JWT = {
         seconds=60 * 60
     ),  # lasts for 60 minutes
 }
-
-
-CRONJOBS = [
-    ('* * * * *', 'notes.cron.my_cron_job')
-]
 
